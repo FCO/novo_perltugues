@@ -210,8 +210,12 @@ sub cria_arvore {
       }elsif(grep {$cmd eq $_} @funcoes){
       }elsif(grep {$cmd eq $_} @inicio_prio){
          push @cmd_atual, pega_prio($code, %vars);
+      }elsif(grep {$cmd eq $_} @fim_prio){
+         die qq|Bloco de prioridade fechado ("$cmd") mas não aberto|;
       }elsif(grep {$cmd eq $_} @inicio_bloco){
          push @cmd_atual, pega_bloco($code, %vars);
+      }elsif(grep {$cmd eq $_} @fim_bloco){
+         die qq|Bloco de prioridade fechado ("$cmd") mas não aberto|;
       }elsif(exists $vars{$cmd}){
          push @cmd_atual, {var => $cmd};
       }elsif($ops->eh_op($cmd)){
