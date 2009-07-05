@@ -55,24 +55,19 @@ sub new {
                    return;
                   },
    );
-   $self->novo_op(
-      "op" => "," , antes => 1, depois => 1, meth => "lista"
-   );
-   $self->novo_op(
-      "op" => "=>", antes => 1, depois => 1, meth => "lista"
-   );
-   $self->novo_op(
-      "op" => "+" , antes => 1, depois => 1, meth => "soma"
-   );
-   $self->novo_op(
-      "op" => "*" , antes => 1, depois => 1, meth => "mult"
-   );
-   $self->novo_op(
-      "op" => "/" , antes => 1, depois => 1, meth => "div"
-   );
-   $self->novo_op(
-      "op" => "-" , antes => 1, depois => 1, meth => "subt"
-   );
+   $self->novo_op( "op" => ","  , antes => 1, depois => 1, meth => "lista");
+   $self->novo_op( "op" => "=>" , antes => 1, depois => 1, meth => "lista");
+   $self->novo_op( "op" => "+"  , antes => 1, depois => 1, meth => "soma" );
+   $self->novo_op( "op" => "*"  , antes => 1, depois => 1, meth => "mult" );
+   $self->novo_op( "op" => "/"  , antes => 1, depois => 1, meth => "div"  );
+   $self->novo_op( "op" => "-"  , antes => 1, depois => 1, meth => "subt" );
+   $self->novo_op( "op" => "%"  , antes => 1, depois => 1, meth => "resto");
+   $self->novo_op( "op" => "ou" , antes => 1, depois => 1, meth => "ou"   );
+   $self->novo_op( "op" => "e"  , antes => 1, depois => 1, meth => "e"    );
+   $self->novo_op( "op" => "nao", antes => 0, depois => 1, meth => "nao"  );
+   $self->novo_op( "op" => "||" , antes => 1, depois => 1, meth => "ou"   );
+   $self->novo_op( "op" => "&&" , antes => 1, depois => 1, meth => "e"    );
+   $self->novo_op( "op" => "!"  , antes => 0, depois => 1, meth => "nao"  );
    $self;
 }
 

@@ -84,7 +84,7 @@ sub parse {
    $lang = eval "use $base; $base->new";
    $ops = $lang->operadores;
    CODE: for (@code){
-      my $ret =   [separa($_  , $ops->ops)];
+      my $ret =   [separa($_  , sort {length $b <=> length $a} $ops->ops)];
       $ret    =   [separa($ret, @inicio_bloco, @fim_bloco)];
       $ret    =   [separa($ret, @inicio_prio, @fim_prio)];
       push @code2, separa($ret, $fim_cmd);
