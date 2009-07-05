@@ -19,7 +19,7 @@ my @funcoes    = qw/escreva/;
 
 sub re_escapa {
    my $str = shift;
-   $str =~ s/([](){}+?*.[-])/\\$1/g;
+   $str =~ s/([](){}+?*.|[-])/\\$1/g;
    return $str;
 }
 
@@ -55,7 +55,7 @@ sub separa {
    CODE: for(@strs){
       for my $op (@oper){
          my $op_re = re_escapa($op);
-         if(/$op_re/){
+         if(/$op_re/ and $op !~ /^\w+$/){
             if(defined $`){
                if(defined $'){
                   push @ret, $`, $&, $';
