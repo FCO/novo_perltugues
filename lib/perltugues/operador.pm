@@ -18,11 +18,8 @@ sub op {
 
 sub parse {
    my $self = shift;
-   if(@_){
-      $self->{parse} = shift;
-   }else{
-      $self->{parse};
-   }
+   return {} unless exists $self->{parse};
+   $self->{parse}->(@_);
 }
 
 sub antes {

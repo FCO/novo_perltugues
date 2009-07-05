@@ -82,6 +82,7 @@ sub parse {
    my @code2;
    my $base = "perltugues::linguagem::$lang";
    $lang = eval "use $base; $base->new";
+   die "Linguagem desconhecida$/" if $!;
    $ops = $lang->operadores;
    CODE: for (@code){
       my $ret =   [separa($_  , sort {length $b <=> length $a} $ops->ops)];
@@ -223,12 +224,13 @@ sub cria_arvore {
          push @ant, grep {defined $_} @cmd_atual;
          @cmd_atual = ();
          @pos = cria_arvore($code, $um_cmd + 1, %vars);
-         my $local_vars;
-         push @cmd_atual, grep {defined $_} $ops->meth($cmd, [reduz_lista(\@ant)], [reduz_lista(\@pos)]);
+         #my $local_vars;
+         my ($local_vars, $novo) = $ops->meth($cmd, [reduz_lista(\@ant)], [reduz_lista(\@pos)]);
+         push @cmd_atual, grep {defined $_} @$novo;
          #push @cmd_atual, grep {defined $_} $ops->meth($cmd, \@ant, \@pos);
          #($local_vars) = $operadores{$cmd}->{parse}->(@ant, reduz_lista(@pos_parse))
          #   if exists $operadores{$cmd}->{parse};
-         #@vars{keys %$local_vars} = values %$local_vars;
+         @vars{keys %$local_vars} = values %$local_vars;
       }elsif($cmd eq $fim_cmd){
          push @code_tree, @cmd_atual;
          @cmd_atual = ();

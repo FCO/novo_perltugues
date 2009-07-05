@@ -76,6 +76,8 @@ sub meth {
    @antes  = splice @resto_antes , @resto_antes - $ant, $ant;
    @depois = splice @resto_depois, 0, $dep;
    my @ret = grep {defined $_} ({$eop->meth => [@resto_antes, grep {defined $_} @antes, @depois]}, @resto_depois);
+   my($vars) = $eop->parse(@resto_antes, grep {defined $_} @antes, @depois);
+   ($vars, \@ret)
 }
 
 sub ops {

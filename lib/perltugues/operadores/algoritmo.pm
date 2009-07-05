@@ -26,7 +26,7 @@ sub new {
                    my $var = shift;
                    my($var_nome) = values %$var;
                    unless(exists $var->{var}){
-                      #die qq|"$var_nome" não é uma variavel e não pode ser incrementada$/|
+                      die qq|"$var_nome" não é uma variavel e não pode ser incrementada$/|
                    }
                    return;
       },
